@@ -2,7 +2,7 @@
 
 ## Play
 修改了原始版本里暂定后可以加速两倍的设定，修改成了20倍
-[https://pmotschmann.github.io/Evolve/](https://yanshuo1992.github.io/Evolve-acc10/)
+https://yanshuo1992.github.io/Evolve-acc10/
 
 ## About
 
