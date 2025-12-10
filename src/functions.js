@@ -153,7 +153,9 @@ export function loopTimers(){
     }
 
     // Main loop takes 250ms without any modifiers.
-    const webWorkerMainTimer = Math.floor(250 * modifier);
+    // const webWorkerMainTimer = Math.floor(250 * modifier);
+    // Main loop takes 250ms without any modifiers.
+    const webWorkerMainTimer = Math.floor(50 * modifier);
     // Mid loop takes 1000ms without any modifiers.
     const baseMidTimer = webWorker.midRatio * webWorkerMainTimer;
     // Long loop (game day) takes 5000ms without any modifiers.
@@ -183,12 +185,14 @@ export function addATime(currentTimestamp){
             global.settings.at = 0;
         }
         // Accelerated time is added only if it is over the threshold.
-        if (timeDiff >= 120000){
+        // if (timeDiff >= 120000){
+        if (timeDiff >= 60000){
             const timers = loopTimers();
             const gameDayDuration = timers.baseLongTimer;
             // The number of days during which the time is accelerated (at) should take as long as 2 / 3 of paused time.
             // at * gameDayDuration / timeAccelerationFactor = 2 / 3 * timeDiff
-            global.settings.at += Math.floor(2 / 3 * timeDiff * timers.timeAccelerationFactor / gameDayDuration);
+            // global.settings.at += Math.floor(2 / 3 * timeDiff * timers.timeAccelerationFactor / gameDayDuration);
+            global.settings.at += Math.floor(4 / 3 * timeDiff * timers.timeAccelerationFactor / gameDayDuration);
         }
         // Accelerated time is capped at 8*60*60/2.5 game days.
         if (global.settings.at > 1152000){
@@ -202,7 +206,7 @@ export function addATime(currentTimestamp){
 
 // Takes the current Date.now, returns whether the minimum threshold to count accelerated time has passed.
 export function exceededATimeThreshold(currentTimestamp){
-    return global.stats.hasOwnProperty('current') && currentTimestamp - global.stats.current >= 120000;
+    return global.stats.hasOwnProperty('current') && currentTimestamp - global.stats.current >= 60000;
 }
 
 window.exportGame = function exportGame(){
