@@ -195,8 +195,8 @@ export function addATime(currentTimestamp){
             global.settings.at += Math.floor(4 / 3 * timeDiff * timers.timeAccelerationFactor / gameDayDuration);
         }
         // Accelerated time is capped at 8*60*60/2.5 game days.
-        if (global.settings.at > 1152000){
-            global.settings.at = 1152000;
+        if (global.settings.at > 11520000){
+            global.settings.at = 11520000;
         }
         atrack.t = global.settings.at;
         // Updating the current date so that it won't be counted twice (e.g., when unpausing).
